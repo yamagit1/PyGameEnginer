@@ -4,31 +4,22 @@
 
 import time
 
-from ManagementState import cManagementState
 import config
+from Singleton import cSingleton
+from ManagementState import cManagementState
+from FPSController import cFPSController
+from ViewController import cViewController
 
 class cGame(object):
-    # instance
+    __metaclass__ = cSingleton
+
     __isAlive = None
     __isRuning = None
-    __instance = None
+
 
     def __init__(self):
-        if cGame.__instance != None:
-            raise Exception("This class is a singleton!")
-        else:
-            cGame.__instance = self
-
-        cGame.__isAlive = True
-        cGame.__isRuning = True
-
-
-    @staticmethod
-    def get_Instance():
-        """ Static access method. """
-        if cGame.__instance == None:
-            cGame()
-        return cGame.__instance
+        cGame.__isAlive     = True
+        cGame.__isRuning    = True
 
 
     def is_Alive(self):
@@ -44,13 +35,17 @@ class cGame(object):
         self._Init()
 
         while(self.is_Alive()):
+            cFPSController().begin_Count()
             if (self.is_Running()):
-                cManagementState.get_Instance().Update(True)
+                cManagementState().Update(True)
                 print "game_lib Run"
             else:
                 print "game_lib pause"
-                cManagementState.get_Instance().Update(False)
-            time.sleep(float(1)/float(5))
+                cManagementState().Update(False)
+
+            cViewController().update_View()
+            cViewController().render_View()
+            cFPSController().end_Count()
 
         self._Destroy()
 

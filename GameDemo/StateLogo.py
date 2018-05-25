@@ -22,7 +22,7 @@ class cStateLogo(object):
         print "Update logo " + str(self.__count)
         self.__count -= 1
         if (self.__count == 0):
-            cManagementState.get_Instance().swith_State(cStateMain())
+            cManagementState().swith_State(cStateMain())
 
 
     def Render(self):

@@ -1,26 +1,18 @@
+"""
+
+"""
+from Singleton import cSingleton
 
 class cManagementState(object):
+    __metaclass__ = cSingleton
+
     __currentState = None
     __nextState = None
-    __instance = None
 
 
     def __init__(self):
-        if cManagementState.__instance != None:
-            raise Exception("This class is a singleton!")
-        else:
-            cManagementState.__instance = self
-
         __currentState = None
         __nextState = None
-
-
-    @staticmethod
-    def get_Instance():
-        """ Static access method. """
-        if cManagementState.__instance == None:
-            cManagementState()
-        return cManagementState.__instance
 
 
     def Update(self, isRun):
