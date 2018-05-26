@@ -2,8 +2,10 @@
 
 """
 import sys
-sys.path.append('../PyGameEnginer/config')
-from ManagementState import cManagementState
+import sys
+sys.path.append('../PyGameEnginer/StateManager')
+
+from StateManager import cStateManager
 
 
 class cStateMain(object):
@@ -25,3 +27,6 @@ class cStateMain(object):
 
     def _destroy_State(self):
         print "_Destroy cStateMain"
+
+    def on_Controll_Event(self, event):
+        print event

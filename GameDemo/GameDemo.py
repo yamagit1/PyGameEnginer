@@ -1,29 +1,39 @@
 import sys
+sys.path.append('../PyGameEnginer/GameManager')
+sys.path.append('../PyGameEnginer/VideoManager')
+sys.path.append('../PyGameEnginer/StateManager')
+sys.path.append('../PyGameEnginer/UtilManager')
+sys.path.append('../PyGameEnginer/EventManager')
 
-sys.path.append('../PyGameEnginer/config')
-
+import pygame
 from game import cGame
-from ManagementState import cManagementState
-from State import cState
 from FPSController import cFPSController
-from ViewController import cViewController
-from  ViewPyGame import cViewPyGame
+from StateManager import cStateManager
+from VideoController import cVideoController
+from VideoPyGameDriver import cVideoPyGameDriver
+from EventController import cEventController
+from EventPyGameDriver import cEventPyGameDriver
 from StateLogo import *
 
 class GameDemo(cGame):
-    def __init__(self):
-        cGame.__init__(self)
-
 
     def _Init(self):
         print "gamedemo __Init"
-        cManagementState().swith_State(cStateLogo())
+        pygame.init()
+        cStateManager().swith_State(cStateLogo())
         cFPSController().config_FPS_Limit(1)
-        cViewController().create_View(cViewPyGame())
+        cVideoController().create_View(cVideoPyGameDriver(), title="Game python", fullScreen=False, width=500, hight=500)
+        cEventController().set_Driver(cEventPyGameDriver())
+
 
     def _Destroy(self):
         print "gamedemo __Destroy"
 
+
+    def _on_Controll_Event(self, events):
+        for event in events:
+            if (event.type == pygame.QUIT):
+                cGame().Exit()
 
 GameDemo().Run()
 

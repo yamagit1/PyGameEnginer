@@ -1,8 +1,6 @@
 """
 
 """
-
-import config
 import time
 
 from Singleton import cSingleton
@@ -43,6 +41,7 @@ class cFPSController(object):
         cFPSController.__fpsTimeFrame       = float(1)/float(fpsLimit)
         cFPSController.__fpsTimeFrameReal   = 0.0
         cFPSController.__fpsTimeStart       = 0.0
+
 
     def begin_Count(self):
         cFPSController.__fpsTimeStart = time.time()

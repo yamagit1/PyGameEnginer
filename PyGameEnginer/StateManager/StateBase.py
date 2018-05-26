@@ -2,7 +2,7 @@
 
 """
 
-class cState(object):
+class cStateBase(object):
 
     def _init_State(self, *args):
         print "__initState"
@@ -18,3 +18,6 @@ class cState(object):
 
     def _destroy_State(self):
         print "_Destroy"
+
+    def on_Controll_Event(self):
+        pass

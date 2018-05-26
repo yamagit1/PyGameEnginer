@@ -1,9 +1,12 @@
 """
 
 """
+import sys
+sys.path.append('../UtilManager')
+
 from Singleton import cSingleton
 
-class cManagementState(object):
+class cStateManager(object):
     __metaclass__ = cSingleton
 
     __currentState = None
@@ -34,3 +37,8 @@ class cManagementState(object):
 
     def swith_State(self, nextState):
         self.__nextState = nextState
+
+
+    def forward_Event(self, event):
+        if (self.__currentState != None):
+            self.__currentState.on_Controll_Event(event)
